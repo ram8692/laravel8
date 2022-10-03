@@ -10,7 +10,7 @@ use Illuminate\Queue\SerializesModels;
 class SendMarkDownMail extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $name;
     /**
      * Create a new message instance.
      *
@@ -19,6 +19,7 @@ class SendMarkDownMail extends Mailable
     public function __construct()
     {
         //
+        $this->name = 'the test coder';
     }
 
     /**
