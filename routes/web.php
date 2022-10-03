@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Mail\SendMarkDownMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +21,6 @@ Route::get('/', function () {
 
  Route::get('mail',function(){
      
-     Mail::TO("test@test.com")->send(new App\Mail\SendTestMail());
+     Mail::TO("test@test.com")->send(new SendMarkDownMail());
      echo "mail sent";
  });
