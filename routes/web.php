@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +20,7 @@ Route::get('/', function () {
 
  Route::get('mail',function(){
      $data = ['name'=>'the test coder'];
-     Mail::send([],[],function($msg){
+     Mail::send('emailTempFile',$data,function($msg){
         $msg->to("test@test.com","advance laravel user")->subject("advance laravel series")->setBody("hi this is working fine");
      });
      echo "mail sent";
