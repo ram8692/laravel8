@@ -6,7 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-
+//php  artisan make:mail SendMarkDownMail --markdown=emails.markdown
 class SendMarkDownMail extends Mailable
 {
     use Queueable, SerializesModels;
