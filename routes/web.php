@@ -17,3 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+ Route::get('mail',function(){
+     $data = ['name'=>'the test coder'];
+     Mail::send([],[],function($msg){
+        $msg->to("test@test.com","advance laravel user")->subject("advance laravel series")->setBody("hi this is working fine");
+     });
+     echo "mail sent";
+ });
