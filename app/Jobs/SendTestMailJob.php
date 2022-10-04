@@ -10,19 +10,20 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Member;
 
 class SendTestMailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
+public $member;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Member $member)
     {
-        //
+        $this->member = $member;
     }
 
     /**
@@ -32,6 +33,6 @@ class SendTestMailJob implements ShouldQueue
      */
     public function handle()
     {
-        Mail::TO("test@test.com")->send(new SendMarkDownMail());
+        Mail::to($this->member->email)->send(new SendMarkDownMail());
     }
 }

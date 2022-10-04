@@ -2,6 +2,7 @@
 use App\Mail\SendMarkDownMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use App\Models\Member;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +29,12 @@ Route::get('/', function () {
      //dispatch(new \App\Jobs\SendTestMailJob())->delay(now()->addSeconds(5));
      \App\Jobs\SendTestMailJob::dispatch()->delay(now()->addSeconds(5));
     echo "mail sent";
+});
+
+Route::get('queue2',function(){
+    $member = Member::findOrFail(1);
+   // dd($member);
+    \App\Jobs\SendTestMailJob::dispatch($member)->delay(now()->addSeconds(5));
+    echo "mail sent";
+
 });
