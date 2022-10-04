@@ -1,5 +1,4 @@
 <?php
-
 use App\Mail\SendMarkDownMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -26,10 +25,7 @@ Route::get('/', function () {
  });
 
  Route::get('queue',function(){
-     dispatch(function(){
-        Mail::TO("test@test.com")->send(new SendMarkDownMail());
-     })->delay(now()->addSeconds(5));
-   
-    
+     //dispatch(new \App\Jobs\SendTestMailJob())->delay(now()->addSeconds(5));
+     \App\Jobs\SendTestMailJob::dispatch()->delay(now()->addSeconds(5));
     echo "mail sent";
 });
