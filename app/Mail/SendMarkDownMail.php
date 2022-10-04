@@ -12,6 +12,7 @@ class SendMarkDownMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $user;
+    public Member $member;
     
 
     /**
@@ -19,11 +20,11 @@ class SendMarkDownMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Member $member)
     {
         //
         $this->name = 'the test coder';
-       // $this->member = $member;
+        $this->member = $member;
     }
 
     /**

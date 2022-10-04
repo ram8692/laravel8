@@ -15,7 +15,7 @@ use App\Models\Member;
 class SendTestMailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-public $member;
+public Member $member;
     /**
      * Create a new job instance.
      *
@@ -33,6 +33,7 @@ public $member;
      */
     public function handle()
     {
-        Mail::to($this->member->email)->send(new SendMarkDownMail());
+        
+        Mail::to($this->member->email)->send(new SendMarkDownMail($this->member));
     }
 }

@@ -1,5 +1,5 @@
 @component('mail::message')
-# Introduction {{$name}}
+# Introduction {{$member->name}}
 
 The body of your message.
 

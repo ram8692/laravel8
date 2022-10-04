@@ -33,8 +33,7 @@ Route::get('/', function () {
 
 Route::get('queue2',function(){
     $member = Member::findOrFail(1);
-   // dd($member);
+    //dd($member);
     \App\Jobs\SendTestMailJob::dispatch($member)->delay(now()->addSeconds(5));
     echo "mail sent";
-
 });
