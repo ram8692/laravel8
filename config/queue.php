@@ -42,6 +42,14 @@ return [
             'after_commit' => false,
         ],
 
+        'mysql_custom_queue' => [
+            'driver' => 'database',
+            'table' => 'jobs',
+            'queue' => 'default',
+            'retry_after' => 90,
+            'after_commit' => false,
+        ],
+
         'beanstalkd' => [
             'driver' => 'beanstalkd',
             'host' => 'localhost',

@@ -24,3 +24,12 @@ Route::get('/', function () {
      Mail::TO("test@test.com")->send(new SendMarkDownMail());
      echo "mail sent";
  });
+
+ Route::get('queue',function(){
+     dispatch(function(){
+        Mail::TO("test@test.com")->send(new SendMarkDownMail());
+     })->delay(now()->addSeconds(5));
+   
+    
+    echo "mail sent";
+});
