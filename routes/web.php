@@ -5,6 +5,7 @@ use App\Mail\SendMarkDownMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Models\Member;
+use App\Notifications\OrderShipedNotification;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,4 +46,10 @@ Route::get('listener',function(){
     //event(new SomeoneCheckedProfile($member)); //by this u can fire the event
     \App\Events\SomeoneCheckedProfile::dispatch($member); //by this way u can fire the job
     return $member->name.' your profile checked';
+});
+
+Route::get('notify',function(){
+    $member = Member::findOrFail(1);
+    $member->notify((new OrderShipedNotification())->delay(5));
+    //return $member->name.' your profile checked';
 });
