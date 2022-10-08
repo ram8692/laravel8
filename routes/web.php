@@ -1,4 +1,6 @@
 <?php
+
+use App\Events\SomeoneCheckedProfile;
 use App\Mail\SendMarkDownMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -36,4 +38,11 @@ Route::get('queue2',function(){
     //dd($member);
     \App\Jobs\SendTestMailJob::dispatch($member)->delay(now()->addSeconds(5));
     echo "mail sent";
+});
+
+Route::get('listener',function(){
+    $member = Member::findOrFail(1);
+    //event(new SomeoneCheckedProfile($member)); //by this u can fire the event
+    \App\Events\SomeoneCheckedProfile::dispatch($member); //by this way u can fire the job
+    return $member->name.' your profile checked';
 });
