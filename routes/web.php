@@ -50,6 +50,6 @@ Route::get('listener',function(){
 
 Route::get('notify',function(){
     $member = Member::findOrFail(1);
-    $member->notify((new OrderShipedNotification())->delay(5));
+    $member->notify((new OrderShipedNotification()));
     //return $member->name.' your profile checked';
 });
