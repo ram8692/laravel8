@@ -4,11 +4,14 @@ namespace App\Listeners;
 
 use App\Events\SomeoneCheckedProfile;
 use App\Jobs\SendProfileCheckedMailJob;
+use App\Mail\ProfileCheckedMail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Mail;
 
-class SendProfileCheckedNotification
+class SendProfileCheckedNotification implements ShouldQueue
 {
+    public int $delay = 5;
     /**
      * Create the event listener.
      *
@@ -27,7 +30,6 @@ class SendProfileCheckedNotification
      */
     public function handle(SomeoneCheckedProfile $event)
     {
-        $delay = now()->addSeconds(3);//code will run after 3 seconds
-        SendProfileCheckedMailJob::dispatch($event->member)->delay($delay);
+        Mail::to($event->member->mail)->send(new ProfileCheckedMail($event->member));
     }
 }
