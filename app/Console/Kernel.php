@@ -2,8 +2,11 @@
 
 namespace App\Console;
 
+use App\Jobs\SendProfileCheckedMailJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Models\Member;
+
 
 class Kernel extends ConsoleKernel
 {
@@ -16,6 +19,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $member = Member::findOrFail(1);
+        $schedule->job(new SendProfileCheckedMailJob($member))->everyMinute();
+
+        $schedule->command("queue:work --stop-when-empty")->everyMinute();
     }
 
     /**
