@@ -53,3 +53,7 @@ Route::get('notify',function(){
     $member->notify((new OrderShipedNotification()));
     //return $member->name.' your profile checked';
 });
+
+Route::get('/livewire', function () {
+    return view('livewire');
+});
